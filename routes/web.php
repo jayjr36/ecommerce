@@ -12,9 +12,9 @@ use App\Http\Controllers\CustomerController;
 
 
 
-Route::get('/', function () {
-    return view('layouts.admin');
-});
+// Route::get('/', function () {
+//     return view('layouts.admin');
+// });
 
 // These routes are for the admin to manage categories and products.
 // They are both resource controllers, which means they will create
@@ -34,6 +34,7 @@ Route::get('/', function () {
 // the standard CRUD routes for the products model.
 Route::resource('categories', CategoryController::class);
 Route::resource('products', ProductController::class);
+Route::get('/', [ProductController::class, 'shop'])->name('shop');
 Route::get('/shop', [ProductController::class, 'shop'])->name('shop');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');

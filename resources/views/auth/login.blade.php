@@ -1,9 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    /* Custom styles for the Breezeway theme */
+    body {
+        background-color: #f8f9fa; /* Light background for contrast */
+    }
+    .breezeway-title {
+        font-family: 'Georgia', serif; /* Artistic font style */
+        font-size: 2.5rem; /* Larger font size */
+        color: #ff7f30; /* Orange color */
+        text-align: center; /* Centered title */
+        margin-bottom: 20px; /* Space below title */
+    }
+    .card {
+        /* border: 1px solid #ff7f30;  */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Elevation for the card */
+    }
+    .btn-primary {
+        background-color: #ff7f30; /* Orange button */
+        border-color: #ff7f30; /* Orange border for button */
+    }
+    .btn-primary:hover {
+        background-color: #e76f24; /* Darker orange on hover */
+        border-color: #e76f24; /* Darker border on hover */
+    }
+    .form-check-label {
+        color: #333; /* Darker color for checkbox label */
+    }
+</style>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <div class="text-center breezeway-title">BreezeBuy</div> <!-- Artistic System Name -->
+
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
