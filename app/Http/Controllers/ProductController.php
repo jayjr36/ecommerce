@@ -25,13 +25,33 @@ class ProductController extends Controller
             'category_id' => 'required',
             'image' => 'nullable|mimes:jpeg,jpg,png'
         ]);
-
-        $image = $request->file('image');
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $imageName);
-        Product::create($request->all());
+    
+        $imagePath = null; // Initialize an empty image path
+    
+        // Check if an image is uploaded
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+    
+            // Move the image to the 'public/images' directory
+            $image->move(public_path('images'), $imageName);
+    
+            // Save the relative image path (e.g., 'images/imagename.jpg')
+            $imagePath = 'images/' . $imageName;
+        }
+    
+        // Create the product with the image path
+        Product::create([
+            'name' => $request->name,
+            'quantity' => $request->quantity,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'image' => $imagePath, // Save the image path to the database
+        ]);
+    
         return redirect()->route('products.index');
     }
+    
 
     public function edit(Product $product)
 {

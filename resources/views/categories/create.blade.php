@@ -1,11 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
-
-<div class="container my-4">
-    <div class="col-md-6 mx-auto">
+<div class="container" style="width: 60%; margin: auto; margin-top: 2rem;">
+    <div class="col-md-12">
         <h2 class="text-center mb-4">Add New Category</h2>
-        <form action="{{ route('categories.store') }}" method="POST" class="border p-4 rounded shadow">
+        <form action="{{ route('categories.store') }}" method="POST" style="border: 1px solid #ced4da; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Category Name</label>

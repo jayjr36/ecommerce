@@ -75,22 +75,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Cart Button -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('shop') }}">
-                                <i class="fas fa-home"></i> Home
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('customer.orders') }}">
-                                <i class="fas fa-box"></i> My Orders
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('cart.index') }}">
-                                <i class="fas fa-shopping-cart"></i> Cart
-                            </a>
-                        </li>
+                       
 
                         <!-- Authentication Links -->
                         @guest
@@ -110,6 +95,23 @@
                                 </li>
                             @endif
                         @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('shop') }}">
+                                <i class="fas fa-home"></i> Home
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('customer.orders') }}">
+                                <i class="fas fa-box"></i> My Orders
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('cart.index') }}">
+                                <i class="fas fa-shopping-cart"></i> Cart
+                            </a>
+                        </li>
+                        
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <i class="fas fa-user"></i> {{ Auth::user()->name }}

@@ -30,9 +30,11 @@
                 <div class="col-md-3">
                     <div class="card mb-3" style="border: 1px; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);">
                         <div class="card-body">
-                            <img src="{{ asset('storage/' . $product->image) ?? asset('images/no-image.png') }}"
-                                class="card-img-top" alt="{{ $product->name }}"
-                                style="max-width: 290px; max-height: 150px; border-radius: 5px;">
+                            <img src="{{ $product->image ? asset($product->image) : asset('images/no-image.png') }}"
+                            class="card-img-top"
+                            alt="{{ $product->name }}"
+                            style="max-width: 290px; max-height: 150px; border-radius: 5px;">
+                       
                             <h5 class="card-title text-center fs-6">{{ $product->name }}</h5>
                             <p class="card-text" style="font-size: 12px;">
                                  Tsh {{ number_format($product->price, 0) }}
