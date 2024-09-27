@@ -33,7 +33,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="text-center breezeway-title">BreezeBuy</div> <!-- Artistic System Name -->
+            <div class="text-center breezeway-title">Artisan Hub</div> <!-- Artistic System Name -->
 
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>

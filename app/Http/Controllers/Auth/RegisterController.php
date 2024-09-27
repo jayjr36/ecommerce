@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -29,6 +30,22 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+
+    protected function redirectTo()
+    {
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Redirect based on role
+        if ($user->role === 'admin') {
+            return '/admin/dashboard'; // Admin dashboard
+        } elseif ($user->role === 'customer') {
+            return '/shop'; // Customer dashboard
+        }
+
+        // Default redirection if no role matches (this could be a 404 or home)
+        return '/shop';
+    }
 
     /**
      * Create a new controller instance.

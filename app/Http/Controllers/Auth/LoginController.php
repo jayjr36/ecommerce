@@ -43,11 +43,11 @@ class LoginController extends Controller
          if ($user->role === 'admin') {
              return '/admin/dashboard'; // Admin dashboard
          } elseif ($user->role === 'customer') {
-             return '/customer/dashboard'; // Customer dashboard
+             return '/shop'; // Customer dashboard
          }
  
          // Default redirection if no role matches (this could be a 404 or home)
-         return '/home';
+         return '/shop';
      }
      
     public function __construct()
