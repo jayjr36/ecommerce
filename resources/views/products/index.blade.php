@@ -13,6 +13,7 @@
             <thead class="table-dark">
                 <tr>
                     <th>ID</th>
+                    <th>Image</th>
                     <th>Name</th>
                     <th>Quantity</th>
                     <th>Price (Tshs)</th>
@@ -24,6 +25,12 @@
                 @foreach($products as $product)
                 <tr>
                     <td>{{ $product->id }}</td>
+                    <td>
+                        <img src="{{ $product->image ? asset($product->image) : asset('images/no-image.png') }}"
+                            class="card-img-top"
+                            alt="{{ $product->name }}"
+                            style="max-width: 50px; max-height: 50px; border-radius: 5px;">
+                    </td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->quantity }}</td>
                     <td>{{ number_format($product->price, 2) }}</td>

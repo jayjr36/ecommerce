@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
         // Create an Admin user
         User::create([
             'name' => 'Admin User',
-            'email' => 'admin@breezeway.com',
+            'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
             'role' => 'admin', // Make sure you have a role column in your users table
         ]);
@@ -25,14 +25,14 @@ class UserSeeder extends Seeder
         // Create Customer Users
         User::create([
             'name' => 'John Doe',
-            'email' => 'johndoe@breezeway.com',
+            'email' => 'johndoe@gmail.com',
             'password' => Hash::make('password'),
             'role' => 'customer',
         ]);
 
         User::create([
             'name' => 'Jane Doe',
-            'email' => 'janedoe@breezeway.com',
+            'email' => 'janedoe@gmail.com',
             'password' => Hash::make('password'),
             'role' => 'customer',
         ]);
