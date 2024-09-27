@@ -87,23 +87,23 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Load data into the modal
-        $(document).on('click', '.edit-btn', function() {
-            var url = $(this).data('url');
-            var title = $(this).data('title');
-            $('#editModalLabel').text('Edit ' + title);
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // Load data into the modal
+            $(document).on('click', '.edit-btn', function() {
+                var url = $(this).data('url'); 
+                var title = $(this).data('title');
+                var updateUrl = url.replace('/edit', ''); 
 
-            $.get(url, function(data) {
-                $('#modal-body-content').html(data);
-                $('#editForm').attr('action', url);
-                $('#editModal').modal('show');
+                $('#editModalLabel').text('Edit ' + title);
+
+                $.get(url, function(data) {
+                    $('#modal-body-content').html(data); 
+                    $('#editForm').attr('action', updateUrl); 
+                    $('#editModal').modal('show');
+                });
             });
-        });
-    </script>
+        </script>
 </body>
-
 </html>

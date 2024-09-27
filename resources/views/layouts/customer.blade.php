@@ -25,7 +25,7 @@
     <!-- Custom CSS for navbar -->
     <style>
         .navbar {
-            background-color: #ff6600; /* Orange theme */
+            background-color: #080707FF; 
         }
         .navbar-brand, .nav-link {
             color: white !important;
@@ -33,9 +33,10 @@
         .nav-link {
             margin-right: 15px;
             font-size: 1.1rem;
+            font-weight: bold;
         }
         .nav-link:hover {
-            color: #ffd1b3 !important; /* Lighter orange on hover */
+            color: #e65c00 !important; /* Lighter orange on hover */
         }
         .navbar-toggler {
             border-color: white;
@@ -44,10 +45,10 @@
             background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"%3E%3Cpath stroke="white" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E');
         }
         .dropdown-menu {
-            background-color: #ff6600; /* Match dropdown to navbar color */
+            background-color: #F6F4F2FF; /* Match dropdown to navbar color */
         }
         .dropdown-menu .dropdown-item {
-            color: white;
+            color: black;
         }
         .dropdown-menu .dropdown-item:hover {
             background-color: #e65c00; /* Darker orange on hover */
