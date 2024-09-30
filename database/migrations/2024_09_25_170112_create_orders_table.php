@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('delivery_address');
-            $table->json('items');
             $table->decimal('total_price', 10, 2);
             $table->string('status')->default('PENDING');
             $table->timestamps();

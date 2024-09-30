@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'name' => 'Admin User',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
-            'role' => 'admin', // Make sure you have a role column in your users table
+            'role' => 'admin', 
         ]);
 
         // Create Customer Users

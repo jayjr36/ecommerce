@@ -36,6 +36,8 @@ Route::resource('categories', CategoryController::class);
 Route::resource('products', ProductController::class);
 Route::get('/', [ProductController::class, 'shop'])->name('shop');
 Route::get('/shop', [ProductController::class, 'shop'])->name('shop');
+Route::get('/seller/products', [ProductController::class, 'sellerProducts'])->name('seller.products');
+Route::get('/seller/index', [AdminController::class, 'sellerIndex'])->name('seller.index');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');

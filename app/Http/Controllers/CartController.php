@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Models\OrderItem;
 
 class CartController extends Controller
 {
@@ -26,7 +27,8 @@ class CartController extends Controller
             $cart[$productId] = [
                 "name" => $product->name,
                 "quantity" => $quantity,
-                "price" => $product->price
+                "price" => $product->price,
+                "seller_id" => $product->seller_id,
             ];
         }
 
@@ -36,31 +38,74 @@ class CartController extends Controller
     }
 
     public function checkout(Request $request)
-    {
-        // Redirect to login if user is not authenticated
-        if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'Please log in to submit an order.');
-        }
-    
-        $cart = session()->get('cart', []);
-    
-        if (empty($cart)) {
-            return redirect()->back()->with('error', 'Your cart is empty.');
-        }
-    
-        // Save the order
-        $order = new Order();
-        $order->user_id = auth()->user()->id;
-        $order->delivery_address = $request->delivery_address;
-        $order->items = json_encode($cart); // Store the cart as JSON
-        $order->total_price = array_sum(array_column($cart, 'price')); // Optional: calculate total price
-        $order->save();
-    
-        // Clear the cart after checkout
-        session()->forget('cart');
-    
-        return redirect()->back()->with('success', 'Order placed successfully!');
+{
+    // Redirect to login if user is not authenticated
+    if (!Auth::check()) {
+        return redirect()->route('login')->with('error', 'Please log in to submit an order.');
     }
+
+    $cart = session()->get('cart', []);
+
+    if (empty($cart)) {
+        return redirect()->back()->with('error', 'Your cart is empty.');
+    }
+
+    // Save the order
+    $order = new Order();
+    $order->user_id = auth()->user()->id;
+    $order->delivery_address = $request->delivery_address;
+
+    // Calculate total price
+    $totalPrice = array_sum(array_map(function ($product) {
+        return $product['price'] * $product['quantity'];
+    }, $cart));
+    
+    $order->total_price = $totalPrice;
+    $order->save();
+
+    // Save each item in order_items
+    foreach ($cart as $productId => $productDetails) {
+        $orderItem = new OrderItem();
+        $orderItem->order_id = $order->id;
+        $orderItem->product_id = $productId;
+        $orderItem->seller_id = $productDetails['seller_id']; // Store the seller ID
+        $orderItem->quantity = $productDetails['quantity'];
+        $orderItem->price = $productDetails['price'] * $productDetails['quantity']; // Save price for this item
+        $orderItem->save();
+    }
+
+    // Clear the cart after checkout
+    session()->forget('cart');
+
+    return redirect()->back()->with('success', 'Order placed successfully!');
+}
+
+    // public function checkout(Request $request)
+    // {
+    //     // Redirect to login if user is not authenticated
+    //     if (!Auth::check()) {
+    //         return redirect()->route('login')->with('error', 'Please log in to submit an order.');
+    //     }
+    
+    //     $cart = session()->get('cart', []);
+    
+    //     if (empty($cart)) {
+    //         return redirect()->back()->with('error', 'Your cart is empty.');
+    //     }
+    
+    //     // Save the order
+    //     $order = new Order();
+    //     $order->user_id = auth()->user()->id;
+    //     $order->delivery_address = $request->delivery_address;
+    //     $order->items = json_encode($cart); // Store the cart as JSON
+    //     $order->total_price = array_sum(array_column($cart, 'price')); // Optional: calculate total price
+    //     $order->save();
+    
+    //     // Clear the cart after checkout
+    //     session()->forget('cart');
+    
+    //     return redirect()->back()->with('success', 'Order placed successfully!');
+    // }
 
     public function index()
     {

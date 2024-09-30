@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\Category;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -13,12 +14,18 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
+    public function sellerProducts() {
+        $products = Product::with('category')->where('seller_id', Auth::id())->get();
+        return view('products.seller', compact('products'));
+    }
+
     public function create() {
         $categories = Category::all();
         return view('products.create', compact('categories'));
     }
     public function store(Request $request) {
         $request->validate([
+            'seller_id' => Auth::id(),
             'name' => 'required',
             'quantity' => 'required|integer',
             'price' => 'required|numeric',
