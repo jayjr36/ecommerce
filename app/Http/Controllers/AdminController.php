@@ -74,6 +74,8 @@ class AdminController extends Controller
     
     public function updateStatus(Request $request, Order $order)
     {
+
+
         $order->update(['status' => 'CONFIRMED']);
         return back()->with('success', 'Order status updated successfully!');
     }

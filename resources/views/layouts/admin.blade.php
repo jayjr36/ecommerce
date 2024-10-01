@@ -35,12 +35,20 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('admin.orders') }}">Orders</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('categories.index') }}">Categories</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('products.index') }}">Products</a></li>
+                            @if (Auth::user()->role == 'admin')
+                                <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('admin.orders') }}">Orders</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('categories.index') }}">Categories</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('products.index') }}">Products</a></li>
+                            @else
+                                <li class="nav-item"><a class="nav-link" href="{{ route('seller.index') }}">Home</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('categories.index') }}">Categories</a>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('seller.products') }}">Products</a>
+                                </li>
+                            @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -7,12 +7,12 @@
         <h1 class="display-4">Welcome, {{ Auth::user()->name }}!</h1>
         <p class="lead">Manage your orders and track your sales easily on ArtisanHub.</p>
         <hr class="my-4">
-        <h3>Total Sales: <span class="text-success">${{ number_format($totalSales, 2) }}</span></h3>
+        {{-- <h3>Total Sales: <span class="text-success">${{ number_format($totalSales, 2) }}</span></h3> --}}
     </div>
 
     <!-- Recent Orders Section -->
     <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white">
+        <div class="card-header bg-dark text-white">
             <h4>Recent Orders</h4>
         </div>
         <div class="card-body">
@@ -26,7 +26,7 @@
                             <th>Customer</th>
                             <th>Delivery Address</th>
                             <th>Items</th>
-                            <th>Total Price</th>
+                            <th>Total Price(Tshs)</th>
                             <th>Order Date</th>
                             <th>Actions</th>
                         </tr>
@@ -35,7 +35,7 @@
                         @foreach ($orders as $order)
                         <tr>
                             <td>{{ $order->id }}</td>
-                            <td>{{ $order->name }}</td>
+                            <td>{{ $order->user->name }}</td>
                             <td>{{ $order->delivery_address }}</td>
                             <td>
                                 <ul>
@@ -46,14 +46,14 @@
                                     @endforeach
                                 </ul>
                             </td>
-                            <td>${{ number_format($order->total_price, 2) }}</td>
+                            <td>{{ number_format($order->total_price, 2) }}</td>
                             <td>{{ $order->created_at->format('d M, Y') }}</td>
                             <td>
-                                <form action="{{ route('admin.orders.update', $order->id) }}" method="POST">
-                                    @csrf
-                                    @method('POST')
-                                    <button class="btn btn-sm btn-success" type="submit" {{ $order->status == 'Confirmed' ? 'disabled' : '' }}>Confirm</button>
-                                </form>
+                                    <form action="{{ route('admin.orders.update', $order->id) }}" method="POST">
+                                        @csrf
+                                        <button class="btn btn-sm btn-success" type="submit" {{ $order->status == 'CONFIRMED' ? 'disabled' : '' }}>Confirm</button>
+                                    </form>
+                                
                             </td>
                         </tr>
                         @endforeach
@@ -66,6 +66,18 @@
 
 <!-- Styling for the welcome page -->
 <style>
+
+    .list-group-item {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+    }
+    .list-group-item h4 {
+        font-size: 1.25rem;
+        margin-bottom: 10px;
+    }
+    ul.list-unstyled li {
+        font-size: 1.1rem;
+    }
     .jumbotron {
         background-color: #f9f9f9;
         border-radius: 10px;

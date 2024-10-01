@@ -24,9 +24,15 @@
                     <td>{{ $order->delivery_address }}</td>
                     <td class="text-success">{{ number_format($order->total_price, 2) }}</td>
                     <td>
-                        <ul class="list-unstyled">
+                        {{-- <ul class="list-unstyled">
                             @foreach(json_decode($order->items, true) as $item)
-                            <li>{{ $item['name'] }} <span class="badge bg-secondary">{{ $item['quantity'] }}x</span></li>
+                            <li>{{ $item->product->name }} <span class="badge bg-secondary">{{ $item['quantity'] }}x</span></li>
+                            @endforeach
+                        </ul> --}}
+
+                        <ul class="list-unstyled">
+                            @foreach ($order->orderItems as $item)
+                                <li>{{ $item->product->name }} (Qty: {{ $item->quantity }})</li>
                             @endforeach
                         </ul>
                     </td>

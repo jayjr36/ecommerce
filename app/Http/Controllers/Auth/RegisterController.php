@@ -31,19 +31,20 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/home';
 
+   
     protected function redirectTo()
     {
         // Get the authenticated user
         $user = Auth::user();
 
-        // Redirect based on role
         if ($user->role === 'admin') {
-            return '/admin/dashboard'; // Admin dashboard
+            return '/admin/dashboard';
         } elseif ($user->role === 'customer') {
-            return '/shop'; // Customer dashboard
+            return '/shop'; 
+        }elseif($user->role === 'seller'){
+            return '/seller/index';
         }
 
-        // Default redirection if no role matches (this could be a 404 or home)
         return '/shop';
     }
 

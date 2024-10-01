@@ -11,8 +11,8 @@
                 <tr>
                     <th>Name</th>
                     <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Total</th>
+                    <th>Price(Tshs)</th>
+                    <th>Total(Tshs)</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,8 +20,8 @@
                 <tr>
                     <td>{{ $details['name'] }}</td>
                     <td>{{ $details['quantity'] }}</td>
-                    <td>${{ number_format($details['price'], 2) }}</td>
-                    <td>${{ number_format($details['price'] * $details['quantity'], 2) }}</td>
+                    <td>{{ number_format($details['price'], 2) }}</td>
+                    <td>{{ number_format($details['price'] * $details['quantity'], 2) }}</td>
                 </tr>
                 @endforeach
             </tbody>
